@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blog list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'blog/css/font-awesome.css'%}">
+    <link rel="stylesheet" href="{% static 'blog/css/prism-okaidia.css'%}">
+    <link rel="stylesheet" href="{% static 'blog/css/custom.min.css'%}">
+    <link href="css/blog-home.css" rel="stylesheet">
+</head>
+<body>
+    {% for post in object_list %}
+        {% if post.head_image %}
+            <img src="{{post.head_image.url}}" width="750" height="300" alt="기사사진">
+        {% else %}
+            <img src="{% static 'blog/img/noImg.png' %}" width="750" height="300">
+        {% endif %}
+        <h1>{{post.pk}}:{{post.title}}</h1>
+        <h4>{{post.content | truncatewords:20}}<a href="{% url 'detail' post.pk %}">read more..</a>
+        </h4>
+        <h4>Post on {{post.created}} by {{post.author}}</h4>
+        <hr color="red">
+        <br><br>
+    {% endfor %}
+    <script src="https://bootswatch.com/_vender/jquery/dist/jquery.min.js"></script>
+    <script src="https://bootswatch.com/_vender/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://bootswatch.com/_assets/js/custom.js"></script>
+</body>
+</html>
